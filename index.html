@@ -1,0 +1,265 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CamWAM: A World-Action Model for Autonomous Photography</title><style>
+:root{--ink:#1d2330;--sub:#5b6474;--line:#e6e8ee;--acc:#2f6fed;--bg:#f7f8fb}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+     color:var(--ink);background:#fff;line-height:1.6}
+header{padding:56px 24px 36px;text-align:center;background:linear-gradient(180deg,#f2f5fc 0%,#fff 100%)}
+h1{font-size:40px;margin:0 0 8px;letter-spacing:-.5px}
+.subtitle{font-size:20px;color:var(--sub);margin:0 0 10px}
+.authors{font-size:15px;color:var(--sub)}
+nav{display:flex;gap:10px;justify-content:center;margin-top:18px}
+nav a{padding:7px 16px;border:1px solid var(--line);border-radius:20px;color:var(--ink);text-decoration:none;
+      font-size:14px;background:#fff}
+nav a:hover{border-color:var(--acc);color:var(--acc)}
+main{max-width:1320px;margin:0 auto;padding:0 24px 64px}
+section{margin-top:44px}
+h2{font-size:26px;margin:0 0 10px}
+.lead{color:var(--sub);font-size:16px;margin:0 0 8px;text-align:justify;hyphens:auto}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:14px 0 22px;font-size:14px;color:var(--sub)}
+.legend b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+@media (max-width:1100px){.grid{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;
+      box-shadow:0 1px 3px rgba(20,30,60,.05)}
+.card-h{display:flex;justify-content:space-between;align-items:baseline;padding:12px 16px 8px}
+.card-h .t{font-weight:600}
+.card-h .m{font-size:13px;color:var(--sub)}
+.labels{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 6px;font-size:13px;color:var(--sub)}
+.vid{padding:0 16px}
+.vid video{width:100%;display:block;border-radius:8px;background:#000}
+.bottom{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;padding:14px 16px 16px;align-items:center}
+.bottom img{width:100%;display:block;border-radius:8px}
+.cap{font-size:12.5px;color:var(--sub);margin-top:5px}
+.q{background:var(--bg);border-radius:10px;padding:14px 14px 12px;text-align:center}
+.q .lab{font-size:13px;color:var(--sub)}
+.q .val{font-size:30px;font-weight:700;margin:4px 0 2px;white-space:nowrap}
+.q .val .arrow{color:var(--sub);font-weight:400;margin:0 6px}
+.q .val .end{color:var(--acc)}
+.q .gain{font-size:14px;font-weight:600;color:#178a4a}
+.pipe{border:1px solid var(--line);border-radius:14px;padding:18px 18px 8px;margin:16px 0 8px;background:#fbfcfe}
+.pipe svg{width:100%;height:auto;display:block}
+.steps-list{color:var(--sub);font-size:15px;padding-left:22px;margin:10px 0 8px;text-align:justify;hyphens:auto}
+.steps-list li{margin:3px 0}
+.rw-card{margin-top:18px}
+.rw-steps{display:grid;grid-template-columns:1fr;gap:14px;padding:4px 16px 4px}
+.rw-step{display:grid;grid-template-columns:52px 1fr 26px 1fr 1fr;align-items:center;gap:10px}
+@media (max-width:900px){.rw-step{grid-template-columns:1fr}.rw-arrow{display:none}}
+.rw-k{font-weight:600;font-size:14px;color:var(--sub)}
+.rw-step figure{margin:0}.rw-step img,.rw-step video{width:100%;display:block;border-radius:8px;background:#000}
+.rw-step img.traj{background:#fff;border:1px solid var(--line);aspect-ratio:3/2;object-fit:contain}
+.rw-step figcaption{font-size:12px;color:var(--sub);margin-top:3px}
+.rw-arrow{font-size:22px;color:var(--sub);text-align:center}
+.rw-cap{padding:6px 16px 14px;margin:0}
+.rw-flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 8px;padding:4px 16px 16px}
+.rw-flow figure{margin:0;flex:0 0 214px}
+.rw-flow img,.rw-flow video{width:100%;aspect-ratio:3/2;display:block;border-radius:8px;background:#000;object-fit:cover}
+.rw-flow .rw-o img{outline:2px solid #1d2330;outline-offset:-2px}
+.rw-flow .rw-p video{outline:2px solid #2f6fed;outline-offset:-2px}
+.rw-flow figcaption{font-size:12px;color:var(--sub);margin-top:3px}
+.rw-flow .rw-p figcaption b{color:#2f6fed}
+.placeholder{border:1px dashed #c9cfdb;border-radius:14px;padding:28px;color:var(--sub);text-align:center}
+footer{text-align:center;color:var(--sub);font-size:13px;padding:30px 0 40px}
+</style></head><body><header>
+  <h1>CamWAM</h1>
+  <p class="subtitle">A World-Action Model for Autonomous Photography</p>
+  <div class="authors">Anonymous authors · Supplementary material for review</div>
+  <nav><a href="#closed-loop">Closed-loop results</a><a href="#real-world">Real-world experiments</a></nav>
+</header>
+<main>
+<section id="closed-loop">
+  <h2>Closed-loop results in 3DGS scenes</h2>
+  <p class="lead">Selected examples of CamWAM-1.3B on our closed-loop benchmark. In each round, CamWAM predicts a short
+  future video together with camera actions; the first 8 actions are executed in the 3DGS scene, the new view is
+  observed, and the model replans. Execution stops automatically once the predicted motion becomes small
+  (at least 2 and at most 10 rounds).</p>
+  <div class="legend">
+    <span><b>Left:</b> future frames predicted by CamWAM for the executed actions, concatenated over rounds</span>
+    <span><b>Right:</b> views rendered from the 3DGS scene along the executed camera trajectory</span>
+    <span><b>Q:</b> photographic quality (0–100) from our VLM evaluators, averaged over two judges</span>
+  </div>
+  <div class="grid">
+<div class="card" id="ex1">
+  <div class="card-h"><span class="t">Example 1</span><span class="m">Scene 1 · auto-stopped after 8 rounds</span></div>
+  <div class="labels"><span>Predicted future (world model)</span><span>Executed in the 3DGS scene</span></div>
+  <div class="vid"><video src="assets/ex1_pred_exec.mp4" autoplay loop muted playsinline preload="metadata" controls></video></div>
+  <div class="bottom">
+    <div><img src="assets/ex1_final.jpg" alt="Final photograph, example 1" loading="lazy">
+      <div class="cap">Final photograph rendered at the final camera pose</div></div>
+    <div class="q"><div class="lab">Photographic quality Q</div>
+      <div class="val">42<span class="arrow">→</span><span class="end">70</span></div>
+      <div class="gain">+28</div>
+      <div class="cap">start view → final photograph</div></div>
+  </div>
+</div>
+<div class="card" id="ex2">
+  <div class="card-h"><span class="t">Example 2</span><span class="m">Scene 1 · reached the 10-round limit</span></div>
+  <div class="labels"><span>Predicted future (world model)</span><span>Executed in the 3DGS scene</span></div>
+  <div class="vid"><video src="assets/ex2_pred_exec.mp4" autoplay loop muted playsinline preload="metadata" controls></video></div>
+  <div class="bottom">
+    <div><img src="assets/ex2_final.jpg" alt="Final photograph, example 2" loading="lazy">
+      <div class="cap">Final photograph rendered at the final camera pose</div></div>
+    <div class="q"><div class="lab">Photographic quality Q</div>
+      <div class="val">39<span class="arrow">→</span><span class="end">72</span></div>
+      <div class="gain">+33</div>
+      <div class="cap">start view → final photograph</div></div>
+  </div>
+</div>
+<div class="card" id="ex3">
+  <div class="card-h"><span class="t">Example 3</span><span class="m">Scene 1 · auto-stopped after 7 rounds</span></div>
+  <div class="labels"><span>Predicted future (world model)</span><span>Executed in the 3DGS scene</span></div>
+  <div class="vid"><video src="assets/ex3_pred_exec.mp4" autoplay loop muted playsinline preload="metadata" controls></video></div>
+  <div class="bottom">
+    <div><img src="assets/ex3_final.jpg" alt="Final photograph, example 3" loading="lazy">
+      <div class="cap">Final photograph rendered at the final camera pose</div></div>
+    <div class="q"><div class="lab">Photographic quality Q</div>
+      <div class="val">39<span class="arrow">→</span><span class="end">78</span></div>
+      <div class="gain">+39</div>
+      <div class="cap">start view → final photograph</div></div>
+  </div>
+</div>
+<div class="card" id="ex4">
+  <div class="card-h"><span class="t">Example 4</span><span class="m">Scene 2 · reached the 10-round limit</span></div>
+  <div class="labels"><span>Predicted future (world model)</span><span>Executed in the 3DGS scene</span></div>
+  <div class="vid"><video src="assets/ex4_pred_exec.mp4" autoplay loop muted playsinline preload="metadata" controls></video></div>
+  <div class="bottom">
+    <div><img src="assets/ex4_final.jpg" alt="Final photograph, example 4" loading="lazy">
+      <div class="cap">Final photograph rendered at the final camera pose</div></div>
+    <div class="q"><div class="lab">Photographic quality Q</div>
+      <div class="val">37<span class="arrow">→</span><span class="end">79</span></div>
+      <div class="gain">+42</div>
+      <div class="cap">start view → final photograph</div></div>
+  </div>
+</div>
+<div class="card" id="ex5">
+  <div class="card-h"><span class="t">Example 5</span><span class="m">Scene 1 · auto-stopped after 9 rounds</span></div>
+  <div class="labels"><span>Predicted future (world model)</span><span>Executed in the 3DGS scene</span></div>
+  <div class="vid"><video src="assets/ex5_pred_exec.mp4" autoplay loop muted playsinline preload="metadata" controls></video></div>
+  <div class="bottom">
+    <div><img src="assets/ex5_final.jpg" alt="Final photograph, example 5" loading="lazy">
+      <div class="cap">Final photograph rendered at the final camera pose</div></div>
+    <div class="q"><div class="lab">Photographic quality Q</div>
+      <div class="val">36<span class="arrow">→</span><span class="end">77</span></div>
+      <div class="gain">+41</div>
+      <div class="cap">start view → final photograph</div></div>
+  </div>
+</div>
+<div class="card" id="ex6">
+  <div class="card-h"><span class="t">Example 6</span><span class="m">Scene 1 · auto-stopped after 7 rounds</span></div>
+  <div class="labels"><span>Predicted future (world model)</span><span>Executed in the 3DGS scene</span></div>
+  <div class="vid"><video src="assets/ex6_pred_exec.mp4" autoplay loop muted playsinline preload="metadata" controls></video></div>
+  <div class="bottom">
+    <div><img src="assets/ex6_final.jpg" alt="Final photograph, example 6" loading="lazy">
+      <div class="cap">Final photograph rendered at the final camera pose</div></div>
+    <div class="q"><div class="lab">Photographic quality Q</div>
+      <div class="val">37<span class="arrow">→</span><span class="end">77</span></div>
+      <div class="gain">+40</div>
+      <div class="cap">start view → final photograph</div></div>
+  </div>
+</div>
+<div class="card" id="ex7">
+  <div class="card-h"><span class="t">Example 7</span><span class="m">Scene 1 · auto-stopped after 7 rounds</span></div>
+  <div class="labels"><span>Predicted future (world model)</span><span>Executed in the 3DGS scene</span></div>
+  <div class="vid"><video src="assets/ex7_pred_exec.mp4" autoplay loop muted playsinline preload="metadata" controls></video></div>
+  <div class="bottom">
+    <div><img src="assets/ex7_final.jpg" alt="Final photograph, example 7" loading="lazy">
+      <div class="cap">Final photograph rendered at the final camera pose</div></div>
+    <div class="q"><div class="lab">Photographic quality Q</div>
+      <div class="val">42<span class="arrow">→</span><span class="end">79</span></div>
+      <div class="gain">+37</div>
+      <div class="cap">start view → final photograph</div></div>
+  </div>
+</div>
+<div class="card" id="ex8">
+  <div class="card-h"><span class="t">Example 8</span><span class="m">Scene 2 · auto-stopped after 8 rounds</span></div>
+  <div class="labels"><span>Predicted future (world model)</span><span>Executed in the 3DGS scene</span></div>
+  <div class="vid"><video src="assets/ex8_pred_exec.mp4" autoplay loop muted playsinline preload="metadata" controls></video></div>
+  <div class="bottom">
+    <div><img src="assets/ex8_final.jpg" alt="Final photograph, example 8" loading="lazy">
+      <div class="cap">Final photograph rendered at the final camera pose</div></div>
+    <div class="q"><div class="lab">Photographic quality Q</div>
+      <div class="val">40<span class="arrow">→</span><span class="end">69</span></div>
+      <div class="gain">+29</div>
+      <div class="cap">start view → final photograph</div></div>
+  </div>
+</div>
+  </div>
+</section>
+<section id="real-world">
+  <h2>Real-world experiments</h2>
+  <p class="lead">To check whether CamWAM transfers from rendered scenes to real camera footage, we built a
+  human-in-the-loop setup during the rebuttal period.</p>
+  <div class="pipe"><svg viewBox="0 0 980 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Real-world pipeline">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#5b6474"/></marker><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6fed"/></marker></defs>
+<g font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" text-anchor="middle">
+<rect x="78" y="52" width="74" height="132" rx="14" fill="#fff" stroke="#1d2330" stroke-width="3"/>
+<rect x="88" y="68" width="54" height="96" rx="4" fill="#dbe6fb"/>
+<circle cx="115" cy="174" r="4" fill="#1d2330"/>
+<text x="115" y="214" font-size="17" font-weight="700" fill="#1d2330">iPhone</text>
+<text x="115" y="234" font-size="13" fill="#5b6474">held by an operator</text>
+<rect x="400" y="62" width="180" height="112" rx="8" fill="#fff" stroke="#1d2330" stroke-width="3"/>
+<rect x="412" y="74" width="156" height="88" rx="3" fill="#dbe6fb"/>
+<path d="M378,182 L602,182 L588,196 L392,196 z" fill="#1d2330"/>
+<line x1="420" y1="118" x2="452" y2="118" stroke="#2f6fed" stroke-width="4" marker-end="url(#ah2)"/><text x="511" y="113" font-size="15" fill="#2f6fed" font-weight="700">6-DoF Δpose</text><text x="511" y="133" font-size="12" fill="#5b6474">(Δt, ΔR)</text>
+<text x="490" y="222" font-size="17" font-weight="700" fill="#1d2330">Mac</text>
+<text x="490" y="242" font-size="13" fill="#5b6474">guidance interface</text>
+<g fill="#fff" stroke="#1d2330" stroke-width="3">
+<rect x="808" y="56" width="120" height="38" rx="5"/><rect x="808" y="100" width="120" height="38" rx="5"/>
+<rect x="808" y="144" width="120" height="38" rx="5"/></g>
+<g fill="#2f6fed"><circle cx="826" cy="75" r="5"/><circle cx="826" cy="119" r="5"/><circle cx="826" cy="163" r="5"/></g>
+<g stroke="#9aa3b2" stroke-width="3"><line x1="848" y1="75" x2="912" y2="75"/><line x1="848" y1="119" x2="912" y2="119"/>
+<line x1="848" y1="163" x2="912" y2="163"/></g>
+<text x="868" y="214" font-size="17" font-weight="700" fill="#1d2330">GPU server</text>
+<text x="868" y="234" font-size="13" fill="#5b6474">CamWAM</text>
+<g stroke="#5b6474" stroke-width="2.5" fill="none">
+<line x1="168" y1="96" x2="380" y2="96" marker-end="url(#ah)"/><line x1="380" y1="140" x2="168" y2="140" marker-end="url(#ah)"/>
+<line x1="598" y1="96" x2="792" y2="96" marker-end="url(#ah)"/><line x1="792" y1="140" x2="598" y2="140" marker-end="url(#ah)"/></g>
+<g font-size="12" fill="#1d2330">
+<text x="274" y="86">camera frames + 6-DoF pose (ARKit)</text>
+<text x="274" y="162">6-DoF Δpose to target → operator moves</text>
+<text x="695" y="86">current frame</text>
+<text x="695" y="162">target camera pose</text></g>
+</g></svg></div>
+  <ol class="steps-list">
+    <li>The iPhone streams camera frames and its 6-DoF pose (from ARKit) to a Mac.</li>
+    <li>The Mac forwards the current frame to a GPU server running CamWAM, which predicts a future video and the
+    corresponding camera actions.</li>
+    <li>The actions are converted into a target camera pose in the ARKit world frame and sent back to the Mac.</li>
+    <li>The Mac displays the remaining 6-DoF Δpose (translation and rotation) to the operator until the phone reaches the target pose (within 10 cm / 5°);
+    the next frame is then captured.</li>
+  </ol>
+  <p class="lead">We present four outdoor demonstrations using a handheld iPhone, showing CamWAM-1.3B's predicted future
+  videos alongside real images captured after executing the predicted camera movements. These examples provide
+  preliminary validation of CamWAM in real-world settings during the rebuttal period.</p>
+  <div class="card rw-card"><div class="card-h"><span class="t">Clip 1</span>
+  <span class="m">Task: full-body portrait</span></div>
+  <div class="rw-flow"><figure class="rw-o"><img src="assets/rw_c1_t4_obs.jpg" alt="clip 1 observation at 4 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c1_t4_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c1_t6_obs.jpg" alt="clip 1 observation at 6 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c1_t6_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c1_t8_obs.jpg" alt="clip 1 observation at 8 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 2</span>
+  <span class="m">Task: full-body portrait</span></div>
+  <div class="rw-flow"><figure class="rw-o"><img src="assets/rw_c2_t2_obs.jpg" alt="clip 2 observation at 2 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c2_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c2_t6_obs.jpg" alt="clip 2 observation at 6 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 3</span>
+  <span class="m">Task: full-body portrait</span></div>
+  <div class="rw-flow"><figure class="rw-o"><img src="assets/rw_c3_t2_obs.jpg" alt="clip 3 observation at 2 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c3_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c3_t4_obs.jpg" alt="clip 3 observation at 4 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c3_t4_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c3_t6_obs.jpg" alt="clip 3 observation at 6 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 4</span>
+  <span class="m">Task: full-body portrait</span></div>
+  <div class="rw-flow"><figure class="rw-o"><img src="assets/rw_c4_t0_obs.jpg" alt="clip 4 observation at 0 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c4_t0_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c4_t2_obs.jpg" alt="clip 4 observation at 2 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c4_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c4_t4_obs.jpg" alt="clip 4 observation at 4 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c4_t4_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c4_t6_obs.jpg" alt="clip 4 observation at 6 s" loading="lazy">
+  <figcaption><b>Observation</b></figcaption></figure></div></div>
+</section>
+</main>
+<footer>Anonymous project page for double-blind review.</footer></body></html>
