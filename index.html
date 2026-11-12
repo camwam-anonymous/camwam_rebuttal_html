@@ -50,13 +50,14 @@ h2{font-size:26px;margin:0 0 10px}
 .rw-step figcaption{font-size:12px;color:var(--sub);margin-top:3px}
 .rw-arrow{font-size:22px;color:var(--sub);text-align:center}
 .rw-cap{padding:6px 16px 14px;margin:0}
-.rw-flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 8px;padding:4px 16px 16px}
-.rw-flow figure{margin:0;flex:0 0 214px}
-.rw-flow img,.rw-flow video{width:100%;aspect-ratio:3/2;display:block;border-radius:8px;background:#000;object-fit:cover}
-.rw-flow .rw-o img{outline:2px solid #1d2330;outline-offset:-2px}
-.rw-flow .rw-p video{outline:2px solid #2f6fed;outline-offset:-2px}
-.rw-flow figcaption{font-size:12px;color:var(--sub);margin-top:3px}
-.rw-flow .rw-p figcaption b{color:#2f6fed}
+.rw-chain{display:flex;align-items:center;gap:4px;padding:6px 16px 16px}
+.rw-chain figure{margin:0;flex:0 0 calc((100% - 4 * 16px - 10 * 4px) / 7);min-width:0}
+.rw-chain img,.rw-chain video{width:100%;aspect-ratio:3/2;display:block;border-radius:6px;background:#000;object-fit:cover}
+.rw-chain img.traj{object-fit:contain;background:#fff;border:1px solid var(--line)}
+.rw-chain figcaption{font-size:11px;color:var(--sub);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rw-chain figcaption b{color:#1d2330}
+.rw-a{flex:0 0 16px;font-size:15px;color:#9aa3b2;text-align:center}
+@media (max-width:900px){.rw-chain{flex-wrap:wrap}.rw-chain figure{flex:0 0 calc(50% - 14px)}}
 .placeholder{border:1px dashed #c9cfdb;border-radius:14px;padding:28px;color:var(--sub);text-align:center}
 footer{text-align:center;color:var(--sub);font-size:13px;padding:30px 0 40px}
 </style></head><body><header>
@@ -231,35 +232,25 @@ footer{text-align:center;color:var(--sub);font-size:13px;padding:30px 0 40px}
   <p class="lead">We present four outdoor demonstrations using a handheld iPhone, showing CamWAM-1.3B's predicted future
   videos alongside real images captured after executing the predicted camera movements. These examples provide
   preliminary validation of CamWAM in real-world settings during the rebuttal period.</p>
-  <div class="card rw-card"><div class="card-h"><span class="t">Clip 1</span>
-  <span class="m">Task: full-body portrait</span></div>
-  <div class="rw-flow"><figure class="rw-o"><img src="assets/rw_c1_t4_obs.jpg" alt="clip 1 observation at 4 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c1_t4_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
-  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c1_t6_obs.jpg" alt="clip 1 observation at 6 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c1_t6_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
-  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c1_t8_obs.jpg" alt="clip 1 observation at 8 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 2</span>
-  <span class="m">Task: full-body portrait</span></div>
-  <div class="rw-flow"><figure class="rw-o"><img src="assets/rw_c2_t2_obs.jpg" alt="clip 2 observation at 2 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c2_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
-  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c2_t6_obs.jpg" alt="clip 2 observation at 6 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 3</span>
-  <span class="m">Task: full-body portrait</span></div>
-  <div class="rw-flow"><figure class="rw-o"><img src="assets/rw_c3_t2_obs.jpg" alt="clip 3 observation at 2 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c3_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
-  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c3_t4_obs.jpg" alt="clip 3 observation at 4 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c3_t4_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
-  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c3_t6_obs.jpg" alt="clip 3 observation at 6 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 4</span>
-  <span class="m">Task: full-body portrait</span></div>
-  <div class="rw-flow"><figure class="rw-o"><img src="assets/rw_c4_t0_obs.jpg" alt="clip 4 observation at 0 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c4_t0_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
-  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c4_t2_obs.jpg" alt="clip 4 observation at 2 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c4_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
-  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c4_t4_obs.jpg" alt="clip 4 observation at 4 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-p"><video src="assets/rw_c4_t4_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
-  <figcaption><b>Prediction</b></figcaption></figure><div class="rw-arrow">→</div><figure class="rw-o"><img src="assets/rw_c4_t6_obs.jpg" alt="clip 4 observation at 6 s" loading="lazy">
-  <figcaption><b>Observation</b></figcaption></figure></div></div>
+  <div class="card rw-card"><div class="card-h"><span class="t">Clip 1</span></div>
+  <div class="rw-chain"><figure><img src="assets/rw_c1_t4_obs.jpg" alt="observation 1" loading="lazy"><figcaption><b>Observation 1</b></figcaption></figure><div class="rw-a">→</div><figure><video src="assets/rw_c1_t4_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><figure><img class="traj" src="assets/rw_c1_t4_traj.png" alt="predicted camera motion" loading="lazy">
+  <figcaption><b>Predicted motion</b></figcaption></figure><div class="rw-a">→</div><figure><img src="assets/rw_c1_t6_obs.jpg" alt="observation 2" loading="lazy"><figcaption><b>Observation 2</b></figcaption></figure><div class="rw-a">→</div><figure><video src="assets/rw_c1_t6_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><figure><img class="traj" src="assets/rw_c1_t6_traj.png" alt="predicted camera motion" loading="lazy">
+  <figcaption><b>Predicted motion</b></figcaption></figure><div class="rw-a">→</div><figure><img src="assets/rw_c1_t8_obs.jpg" alt="observation 3" loading="lazy"><figcaption><b>Observation 3</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 2</span></div>
+  <div class="rw-chain"><figure><img src="assets/rw_c2_t2_obs.jpg" alt="observation 1" loading="lazy"><figcaption><b>Observation 1</b></figcaption></figure><div class="rw-a">→</div><figure><video src="assets/rw_c2_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><figure><img class="traj" src="assets/rw_c2_t2_traj.png" alt="predicted camera motion" loading="lazy">
+  <figcaption><b>Predicted motion</b></figcaption></figure><div class="rw-a">→</div><figure><img src="assets/rw_c2_t6_obs.jpg" alt="observation 2" loading="lazy"><figcaption><b>Observation 2</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 3</span></div>
+  <div class="rw-chain"><figure><img src="assets/rw_c3_t2_obs.jpg" alt="observation 1" loading="lazy"><figcaption><b>Observation 1</b></figcaption></figure><div class="rw-a">→</div><figure><video src="assets/rw_c3_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><figure><img class="traj" src="assets/rw_c3_t2_traj.png" alt="predicted camera motion" loading="lazy">
+  <figcaption><b>Predicted motion</b></figcaption></figure><div class="rw-a">→</div><figure><img src="assets/rw_c3_t4_obs.jpg" alt="observation 2" loading="lazy"><figcaption><b>Observation 2</b></figcaption></figure><div class="rw-a">→</div><figure><video src="assets/rw_c3_t4_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><figure><img class="traj" src="assets/rw_c3_t4_traj.png" alt="predicted camera motion" loading="lazy">
+  <figcaption><b>Predicted motion</b></figcaption></figure><div class="rw-a">→</div><figure><img src="assets/rw_c3_t6_obs.jpg" alt="observation 3" loading="lazy"><figcaption><b>Observation 3</b></figcaption></figure></div></div><div class="card rw-card"><div class="card-h"><span class="t">Clip 4</span></div>
+  <div class="rw-chain"><figure><img src="assets/rw_c4_t2_obs.jpg" alt="observation 1" loading="lazy"><figcaption><b>Observation 1</b></figcaption></figure><div class="rw-a">→</div><figure><video src="assets/rw_c4_t2_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><figure><img class="traj" src="assets/rw_c4_t2_traj.png" alt="predicted camera motion" loading="lazy">
+  <figcaption><b>Predicted motion</b></figcaption></figure><div class="rw-a">→</div><figure><img src="assets/rw_c4_t6_obs.jpg" alt="observation 2" loading="lazy"><figcaption><b>Observation 2</b></figcaption></figure><div class="rw-a">→</div><figure><video src="assets/rw_c4_t6_pred.mp4" autoplay loop muted playsinline preload="metadata" controls></video>
+  <figcaption><b>Prediction</b></figcaption></figure><figure><img class="traj" src="assets/rw_c4_t6_traj.png" alt="predicted camera motion" loading="lazy">
+  <figcaption><b>Predicted motion</b></figcaption></figure><div class="rw-a">→</div><figure><img src="assets/rw_c4_t8_obs.jpg" alt="observation 3" loading="lazy"><figcaption><b>Observation 3</b></figcaption></figure></div></div>
 </section>
 </main>
 <footer>Anonymous project page for double-blind review.</footer></body></html>
