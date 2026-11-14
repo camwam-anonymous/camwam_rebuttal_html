@@ -196,8 +196,8 @@ footer{text-align:center;color:var(--sub);font-size:13px;padding:30px 0 40px}
 <rect x="78" y="52" width="74" height="132" rx="14" fill="#fff" stroke="#1d2330" stroke-width="3"/>
 <rect x="88" y="68" width="54" height="96" rx="4" fill="#dbe6fb"/>
 <circle cx="115" cy="174" r="4" fill="#1d2330"/>
-<text x="115" y="214" font-size="17" font-weight="700" fill="#1d2330">iPhone</text>
-<text x="115" y="234" font-size="13" fill="#5b6474">held by an operator</text>
+<text x="115" y="212" font-size="17" font-weight="700" fill="#1d2330">Camera</text>
+<text x="115" y="232" font-size="13" fill="#5b6474">+ ARKit</text>
 <rect x="400" y="62" width="180" height="112" rx="8" fill="#fff" stroke="#1d2330" stroke-width="3"/>
 <rect x="412" y="74" width="156" height="88" rx="3" fill="#dbe6fb"/>
 <path d="M378,182 L602,182 L588,196 L392,196 z" fill="#1d2330"/>
@@ -222,14 +222,14 @@ footer{text-align:center;color:var(--sub);font-size:13px;padding:30px 0 40px}
 <text x="695" y="162">target camera pose</text></g>
 </g></svg></div>
   <ol class="steps-list">
-    <li>The iPhone streams camera frames and its 6-DoF pose (from ARKit) to a Mac.</li>
+    <li>The camera streams frames and its 6-DoF pose (from ARKit) to a Mac.</li>
     <li>The Mac forwards the current frame to a GPU server running CamWAM, which predicts a future video and the
     corresponding camera actions.</li>
     <li>The actions are converted into a target camera pose in the ARKit world frame and sent back to the Mac.</li>
-    <li>The Mac displays the remaining 6-DoF Δpose (translation and rotation) to the operator until the phone reaches the target pose (within 10 cm / 5°);
+    <li>The Mac displays the remaining 6-DoF Δpose (translation and rotation) to the operator until the camera reaches the target pose (within 10 cm / 5°);
     the next frame is then captured.</li>
   </ol>
-  <p class="lead">We present four outdoor demonstrations using a handheld iPhone, showing CamWAM-1.3B's predicted future
+  <p class="lead">We present four outdoor demonstrations using a camera, showing CamWAM-1.3B's predicted future
   videos alongside real images captured after executing the predicted camera movements. These examples provide
   preliminary validation of CamWAM in real-world settings during the rebuttal period.</p>
   <div class="card rw-card"><div class="card-h"><span class="t">Clip 1</span></div>
